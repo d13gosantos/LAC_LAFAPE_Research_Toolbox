@@ -1,0 +1,12 @@
+slprj
+slprj/*
+Figures/*
+Figures/**
+Figures
+Workspace
+**/slprj
+*.asv
+*.mat
+*grt_rtw
+*.autosave
+*.slx c
