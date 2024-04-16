@@ -1,17 +1,24 @@
-function [fhandle,phandle,axhandle] = plotscatter(x,y,figname,xname,yname,...,
-        visible,legends)
+function [fhandle,phandle,axhandle] = plotscatter(x,y,varargin)
     %Plot a specified parameter in a struct
     %Defines if the plot result will be saved
     %INPUT: VECTOR, VECTOR
     %matrix2plot = downsample([x y],downrate);
     %Include a parser for the legends and for visibility
     
+    figParams = parse_paperFigure(varargin{:});
+    figname = figParams.FigName;
+    xlabel = figParams.xlabel;
+    ylabel = figParams.ylabel;
+    visible  = figParams.Visible;
+    legends  = figParams.Legend;
+    defaultAxSize = figParams.defaultAxSize;  
+        
     fhandle = figure('Name',figname,'visible',visible);
     axhandle  = axes('Parent',fhandle);
-    setpaperaxes(axhandle,xname,yname,8);
+    setpaperaxes(axhandle,xlabel,ylabel,defaultAxSize);
     
-%     axhandle = axes('Parent',fhandle,'TickLabelInterpreter','latex',...,
-%         'LineWidth',1,'FontSize',10);
+    %     axhandle = axes('Parent',fhandle,'TickLabelInterpreter','latex',...,
+    %         'LineWidth',1,'FontSize',10);
     
     hold(axhandle,'on');
     if min(size(y)) > 1
@@ -32,15 +39,15 @@ function [fhandle,phandle,axhandle] = plotscatter(x,y,figname,xname,yname,...,
     
     % s.MarkerFaceColor = [0 0.5 0.5];
     
-%     xlabel(xname,'FontName','Latin Modern Roman',...
-%         'Interpreter','latex','Fontsize',10);
-%     ylabel(axhandle,yname,'FontName',...
-%         'Latin Modern Roman','Interpreter','latex','Fontsize',10);
+    %     xlabel(xname,'FontName','Latin Modern Roman',...
+    %         'Interpreter','latex','Fontsize',10);
+    %     ylabel(axhandle,yname,'FontName',...
+    %         'Latin Modern Roman','Interpreter','latex','Fontsize',10);
     
     % Set the remaining axes properties
     %
     
-     setylim(axhandle,y); %Set the ylim to the maximum value
+    setylim(axhandle,y); %Set the ylim to the maximum value
     
     xlim(axhandle,[min(min(x)) max(max(x))]);
     
@@ -50,15 +57,15 @@ function [fhandle,phandle,axhandle] = plotscatter(x,y,figname,xname,yname,...,
     box(axhandle,'on');
     %setgrid(axhandle); %Set minor gridos
     
-    if ~exist('legends','var')
-        setlegend(axhandle,yname,'off');
+    if strcmp(legends,'')
+        setlegend(axhandle,ylabel,'Visible','off');
     else
-        setlegend(axhandle,legend(axhandle,legends{:}),'on');
+        setlegend(axhandle,legends,'Visible','on');
     end
     
     hold(axhandle,'off');
-
-   
+    
+    
 end
 
 

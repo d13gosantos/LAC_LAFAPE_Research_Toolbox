@@ -2,43 +2,13 @@ function [fhandle,phandle,axhandle] = plot_paperFigure(x,y,varargin) %figname,xn
     %visible,legends
     % plot_paperFigure Plots a figure in a format of a specified paper with
     % different styles
-    
-    %Define parser
-    lParser = inputParser;
-    default_PaperStyle = 'IEEE';
-    default_figname = 'Figure_1';
-    default_xlabel = '';
-    default_ylabel = '';
-    default_visible = 'on';
-    default_legends = '';
-    
-    addParameter(lParser,'PaperStyle',default_PaperStyle,@ischar);
-    addParameter(lParser,'FigName',default_figname,@ischar);
-    addParameter(lParser,'xlabel',default_xlabel,@ischar);
-    addParameter(lParser,'ylabel',default_ylabel,@ischar);
-    addParameter(lParser,'Visible',default_visible,@ischar);
-    
-    lValidationFcn = @(x) iscell(x) || ischar(x);
-    addParameter(lParser,'Legend',default_legends,lValidationFcn);
-    
-    parse(lParser,varargin{:});
-    
-    PaperStyle = lParser.Results.PaperStyle;
-    figname = lParser.Results.FigName;
-    xlabel = lParser.Results.xlabel;
-    ylabel = lParser.Results.ylabel;
-    visible  = lParser.Results.Visible;
-    legends  = lParser.Results.Legend;
-    
-    switch PaperStyle
-        case 'IEEE'
-            defaultAxSize = 8;
-        case 'Elsevier'
-            defaultAxSize = 7.5;
-        otherwise
-            defaultAxSize = 8;
-            
-    end
+    figParams = parse_paperFigure(varargin{:});
+    figname = figParams.FigName;
+    xlabel = figParams.xlabel;
+    ylabel = figParams.ylabel;
+    visible  = figParams.Visible;
+    legends  = figParams.Legend;
+    defaultAxSize = figParams.defaultAxSize;   
     
     fhandle = figure('Name',figname,'visible',visible,'DefaultAxesFontSize',10);
     axhandle  = axes('Parent',fhandle);
