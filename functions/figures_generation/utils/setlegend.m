@@ -1,25 +1,26 @@
-function setlegend(handle,legends,visible,location,orientation)
-    if ~exist('visible','var')
-        visible = 'off';
-    end
+function setlegend(handle,legends,varargin)%visible,location,orientation
+    % setlegend(handle,legends) Defines the default legend
     
-    if ~exist('location','var')
-        Location= 'best';
-    else
-        Location= location;
-    end
+    %Define parser
+    lParser = inputParser;
+    defaultVisible = 'off';
+    defaultLocation = 'best';
+    defaultOrientation = 'vertical';
     
-     if ~exist('orientation','var')
-        Orientation= 'vertical';
-    else
-        Orientation= orientation;
-    end
- 
+    addParameter(lParser,'Visible',defaultVisible,@ischar);
+    addParameter(lParser,'Location',defaultLocation,@ischar);
+    addParameter(lParser,'Orientation',defaultOrientation,@ischar);  
+    parse(lParser,varargin{:});
+    
+    Visible = lParser.Results.Visible;
+    Location = lParser.Results.Location;
+    Orientation  = lParser.Results.Orientation;
+   
     figlegend = legend(handle,legends,'Interpreter','latex');
-    set(figlegend,'visible',visible,'Interpreter','latex',...
+    set(figlegend,'Visible',Visible,'Interpreter','latex',...
         'FontSize',8,...
         'FontName','Latin Modern Roman',...
         'Location',Location,...
         'Orientation',Orientation);
-%      'Color','none',...);
+    %      'Color','none',...);
 end
