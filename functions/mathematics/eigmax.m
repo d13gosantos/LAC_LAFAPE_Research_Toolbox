@@ -1,4 +1,4 @@
-function eigMax = eigdamax(P)
+function eigMax = eigmax(P)
     if iscell(P)
         maxCell = cellfun(@eig_max,P,'UniformOutput',false);
         eigMax= max([maxCell{:}]);

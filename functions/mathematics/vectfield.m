@@ -1,14 +1,15 @@
-% vectfieldn.m
-% vectfieldn  vector field for system of 2 first order ODEs,
-%            with arrows normalized to the same length
-%   vectfield(func,y1val,y2val) plots the vector field for the system of
-%   two first order ODEs given by func, using the grid of y1val and
-%   y2 values given by the vectors y1val and y2val. func is either a
-%   the name of an inline function of two variables, or a string
-%   with the name of an m-file.
-%   By default, t=0 is used in func. A t value can be specified as an
-%   additional argument: vectfield(func,y1val,y2val,t)
 function vectfield(func,y1val,y2val,t)
+    % vectfieldn.m
+    % vectfieldn  vector field for system of 2 first order ODEs,
+    %            with arrows normalized to the same length
+    %   vectfield(func,y1val,y2val) plots the vector field for the system of
+    %   two first order ODEs given by func, using the grid of y1val and
+    %   y2 values given by the vectors y1val and y2val. func is either a
+    %   the name of an inline function of two variables, or a string
+    %   with the name of an m-file.
+    %   By default, t=0 is used in func. A t value can be specified as an
+    %   additional argument: vectfield(func,y1val,y2val,t)
+    
     if nargin==3
         t=0;
     end
