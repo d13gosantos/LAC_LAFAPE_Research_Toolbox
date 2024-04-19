@@ -6,12 +6,12 @@ function [fhandle,phandle,axhandle] = plotscatter(x,y,varargin)
     %Include a parser for the legends and for visibility
     
     figParams = parse_paperFigure(varargin{:});
-    figname = figParams.FigName;
+    figname = figParams.FigureName;
     xlabel = figParams.xlabel;
     ylabel = figParams.ylabel;
     visible  = figParams.Visible;
     legends  = figParams.Legend;
-    defaultAxSize = figParams.defaultAxSize;  
+    defaultAxSize = figParams.defaultAxSize;   
         
     fhandle = figure('Name',figname,'visible',visible);
     axhandle  = axes('Parent',fhandle);

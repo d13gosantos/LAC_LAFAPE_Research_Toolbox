@@ -1,19 +1,29 @@
 function  [fhandle,lgnd,phandle] = plotmultiplefigs(fhArray,phArray,...
-                                                axhArray,xname,yname)
+                                                axhArray,varargin)
     %Results from multple data and the same x vector unit (e.g. time (s))  
     % Create figure
-    %Gets all the information of the first figure
-    %Results from multple data and the same x vector unit (e.g. time (s))
-    % Create figure
-    %Receives handles from previous figures
-    %Zoom will be implemented later
-    %Gets all the information of the first figure
-    %Usefull to plot data with the same range in x-axis but with different
-    %amount
-    fhandle = makefighandle(fhArray{1});
-    set(fhandle,'Visible','on');
+    %   [fhandle,lgnd,phandle] = plotmultiplefigs(fhArray,phArray,axhArray)
+    %   receives a CellArray of figures, plots and axes handles.
+    %
+    % By default, the axis configuration inherits the configuration of the
+    % first axis handle
+    % Useful to plot data with the same range in x-axis but with different
+    % amount
+    %
+    % See also plotstyledfigure
+    
+    figParams = parse_paperFigure(varargin{:});
+    xlabel = figParams.xlabel;
+    ylabel = figParams.ylabel;
+    
+    AxNumber = figParams.AxNumber;   
+    
+    fhandle = makefighandle(fhArray{AxNumber});
+    
+    set(fhandle,'Visible',Visible);
     axes1 = axes('Parent',fhandle);
     
+    %Plot multiple figures in the same axis
     hold(axes1,'on');
     cellfun(@(p) plot(p.XData,p.YData,'LineWidth',p.LineWidth,...,
         'Color',p.Color,'LineStyle',p.LineStyle), ...
@@ -21,9 +31,9 @@ function  [fhandle,lgnd,phandle] = plotmultiplefigs(fhArray,phArray,...
     phandle = gca;
     hold off;
     
-    xlabel(axes1,xname,'FontName','Latin Modern Roman','Interpreter',...
+    xlabel(axes1,xlabel,'FontName','Latin Modern Roman','Interpreter',...
         'latex','Fontsize',14);
-    ylabel(axes1,yname,'FontName','Latin Modern Roman','Interpreter','latex',...
+    ylabel(axes1,ylabel,'FontName','Latin Modern Roman','Interpreter','latex',...
         'Fontsize',14);
     
     % Set the remaining axes properties

@@ -1,9 +1,9 @@
-function [fhandle,phandle,axhandle] = plot_paperFigure(x,y,varargin) %figname,xname,yname,...,
+function [fhandle,phandle,axhandle] = plotstyledfigure(x,y,varargin) %figname,xname,yname,...,
     %visible,legends
     % plot_paperFigure Plots a figure in a format of a specified paper with
     % different styles
-    figParams = parse_paperFigure(varargin{:});
-    figname = figParams.FigName;
+    figParams = parse_styledfigure(varargin{:});
+    figname = figParams.FigureName;
     xlabel = figParams.xlabel;
     ylabel = figParams.ylabel;
     visible  = figParams.Visible;

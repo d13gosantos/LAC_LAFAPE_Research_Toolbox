@@ -8,6 +8,8 @@ xname = 'Time (s)';
 yname = '';
 visible = 'on';
 legends = {'$\sin(t)$','$\cos(t)$'};
-[fhandle2,phandle2,axhandle2] = plot_paperFigure(t,[y(t);cos(t)],'FigName',figname,...
+[fhandle2,phandle2,axhandle2] = plotstyledfigure(t,[y(t);cos(t)],'FigureName',figname,...
                                                'xlabel',xname,...,
                                                 'Visible',visible,'Legend',legends);
+                                            
+                                            
